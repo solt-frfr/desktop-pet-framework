@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://l7swc56dsr14"]
+
+[ext_resource type="Script" uid="uid://3slt7365lsa7" path="res://window.gd" id="1_mvsta"]
+[ext_resource type="PackedScene" uid="uid://dorq8i30gp5v2" path="res://pet.tscn" id="2_hjewq"]
+
+[node name="Window" type="Window"]
+disable_3d = true
+transparent_bg = true
+physics_object_picking = true
+size = Vector2i(256, 256)
+mouse_passthrough_polygon = PackedVector2Array(0, 0, 256, 256)
+borderless = true
+always_on_top = true
+transparent = true
+script = ExtResource("1_mvsta")
+
+[node name="Pet" parent="." instance=ExtResource("2_hjewq")]
+scale = Vector2(2, 2)
+
+[node name="Menu" type="ItemList" parent="."]
+offset_right = 164.0
+offset_bottom = 89.0
+auto_width = true
+auto_height = true
+item_count = 3
+item_0/text = "Close"
+item_1/text = "Change Costume"
+item_2/text = "Change Character"
+
+[node name="CharacterSelect" type="ItemList" parent="."]
+offset_left = 15.0
+offset_top = 86.0
+offset_right = 195.0
+offset_bottom = 256.0
+auto_width = true
+item_count = 3
+item_0/text = "Miles Edgeworth"
+item_1/text = "Hatsune Miku"
+item_2/text = "Kasane Teto"
+
+[connection signal="item_activated" from="Menu" to="." method="_on_menu_item_activated"]
