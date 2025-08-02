@@ -54,7 +54,7 @@ func _ready():
 	numpad.visible = false
 	alarm_button.visible = false
 	border.visible = false
-	# load_mods()
+	load_mods()
 	var mods = get_mod_folders()
 	var found_pet = false
 	var current_pet_scene
