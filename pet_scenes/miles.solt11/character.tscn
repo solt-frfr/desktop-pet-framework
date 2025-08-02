@@ -1802,6 +1802,11 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("10_tx2mf")
 
+[node name="icon" type="TextureRect" parent="Textures"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="input_event" from="Chest" to="." method="_on_chest_input_event"]
 [connection signal="input_event" from="Crotch" to="." method="_on_crotch_input_event"]
 [connection signal="input_event" from="Head" to="." method="_on_head_input_event"]

@@ -63,11 +63,20 @@ func _ready():
 
 		var err2 = character.load("res://pet_scenes/" + mod + "/character.ini")
 		if err2 != OK:
+			print(mod)
+			print(err2)
+			print("FAILED")
+			get_tree().quit()
 			return
 		
 		var name = character.get_value("character", "name")
 		
-		var image = ImageTexture.create_from_image(Image.load_from_file("res://pet_scenes/" + mod + "/icon.png"))
+		var tex = load("res://pet_scenes/miles.solt11/icon.png") as Texture2D
+		var img = tex.get_image()  # This returns an Image
+		img.resize(16, 16, Image.INTERPOLATE_LANCZOS)
+		var image = ImageTexture.create_from_image(img)
+
+		
 		image.set_size_override(Vector2(16, 16))
 		
 		character_select.add_item(name, image)
@@ -271,8 +280,10 @@ func _on_character_select_item_activated(index: int) -> void:
 		
 		var name = character.get_value("character", "name")
 		
-		var image = ImageTexture.create_from_image(Image.load_from_file("res://pet_scenes/" + mod + "/icon.png"))
-		image.set_size_override(Vector2(16, 16))
+		var tex = load("res://pet_scenes/miles.solt11/icon.png") as Texture2D
+		var img = tex.get_image()  # This returns an Image
+		img.resize(16, 16, Image.INTERPOLATE_LANCZOS)
+		var image = ImageTexture.create_from_image(img)
 		
 		character_select.add_item(name, image)
 		if name == character_select.get_item_text(character_select.get_selected_items()[0]):

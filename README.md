@@ -190,6 +190,8 @@ Character:
 
  Under "Resources to export", find your `character.tscn` and click on it. It should automatically select the necessary folders.
 
+ Under "Filters to export non-resource files/folders", include `*.ini`.
+
  Export it as a .pck and you're done. You can now place this inside the mods folder of any install of Desktop Pet Framework, and you will be able to load it.
 
 # About
