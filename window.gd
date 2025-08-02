@@ -94,12 +94,11 @@ func _ready():
 			break
 			
 	if not found_pet:
-		current_pet_scene = load("res://pet_scenes/miles/character.tscn")
+		current_pet_scene = load("res://pet_scenes/miles.solt11/character.tscn")
 		pet_name = "Miles Edgeworth"
 		pet_idle_anims = 2
 		pet_sitidle_anims = 1
-		pet_clothes_toggles = 1
-		pet_clothes_names.append("Default")
+		pet_clothes_toggles = 0
 		pet_toggle_style = 0
 		pet_sit_offset = Vector2(0, 256)
 		pet_drag_offset = Vector2(0, 30)
@@ -266,13 +265,13 @@ func _on_character_select_item_activated(index: int) -> void:
 	for mod in mods:
 		var character = ConfigFile.new()
 
-		var err2 = character.load("res://pet_scenes/miles/character.ini")
+		var err2 = character.load("res://pet_scenes/" + mod + "/character.ini")
 		if err2 != OK:
 			return
 		
 		var name = character.get_value("character", "name")
 		
-		var image = ImageTexture.create_from_image(Image.load_from_file("res://pet_scenes/miles/icon.png"))
+		var image = ImageTexture.create_from_image(Image.load_from_file("res://pet_scenes/" + mod + "/icon.png"))
 		image.set_size_override(Vector2(16, 16))
 		
 		character_select.add_item(name, image)
@@ -296,13 +295,12 @@ func _on_character_select_item_activated(index: int) -> void:
 			break
 			
 	if not found_pet:
-		current_pet_scene = load("res://pet_scenes/miles/character.tscn")
+		current_pet_scene = load("res://pet_scenes/miles.solt11/character.tscn")
 		pet_name = "Miles Edgeworth"
 		last_pet = "Miles Edgeworth"
 		pet_idle_anims = 2
 		pet_sitidle_anims = 1
-		pet_clothes_toggles = 1
-		pet_clothes_names.append("Default")
+		pet_clothes_toggles = 0
 		pet_toggle_style = 0
 		pet_sit_offset = Vector2(0, 256)
 		pet_drag_offset = Vector2(0, 30)
