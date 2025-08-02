@@ -3,18 +3,31 @@
  
 # Hopes for this project
  ❌ - Not currently implemeneted 	✅ - Currently implemented
+ 
  Mod Support ✅
+ 
  Window Sitting ❌
+ 
  Taskbar Sitting ✅
+ 
  Dragging Animation ✅
+ 
  Idle Animations ✅
+ 
  Alarm / Timed Animation ✅
+ 
  Dance Animation ⏸ - Anim is in game, can't link
+ 
  Touch Reactions (Head / Sensitive Area) ✅
+ 
  Changeable Clothing ✅
+ 
  Toggleable Window Border ✅
+ 
  Flip Sprites ✅
+ 
  Particle Effects ✅
+ 
  Open Source ✅
 
 # Installing Mods
