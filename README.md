@@ -33,7 +33,7 @@
 # Installing Mods
  You can install additional characters by placing them in the mods folder.
 
-> Windows: %APPDATA%\DesktopPetFramework\Mods
+> Windows: %APPDATA%\DesktopPetFramework\mods
 
 > macOS: ~/Library/Application Support/DesktopPetFramework/mods
 
