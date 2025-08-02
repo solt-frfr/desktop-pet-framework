@@ -7,6 +7,7 @@ var moving = false
 @export var alarm: Timer
 @export var alarm_stop: Timer
 @export var alarm_box: TextEdit
+@export var taskbar_box: TextEdit
 @export var alarm_button: Button
 @export var menu: ItemList
 @export var character_select: ItemList
@@ -18,6 +19,7 @@ var current_pet
 var sit
 var last_pet
 var taskbar_height
+var is_taskbar
 
 var pet_name
 var pet_idle_anims
@@ -48,6 +50,7 @@ func _ready():
 	character_select.visible = false
 	costume_select.visible = false
 	alarm_box.visible = false
+	taskbar_box.visible = false
 	numpad.visible = false
 	alarm_button.visible = false
 	border.visible = false
@@ -156,6 +159,7 @@ func _input(event: InputEvent) -> void:
 			costume_select.visible = false
 			alarm_box.visible = false
 			numpad.visible = false
+			taskbar_box.visible = false
 			current_pet.ui_open = false
 			ui_open = false
 	if event.is_action_released("left_click") && not ui_open && moving:
@@ -205,26 +209,46 @@ func set_passthrough_from_area(area: CollisionShape2D):
 
 func _on_menu_item_activated(index: int) -> void:
 	if index == 0:
+		var save = ConfigFile.new()
+		save.set_value("save_data", "last_pet", last_pet)
+		save.set_value("save_data", "taskbar_height", taskbar_height)
+		save.save("user://save.ini")
 		get_tree().quit()
 	if index == 1:
 		character_select.visible = false
 		costume_select.visible = true
 		alarm_box.visible = false
 		numpad.visible = false
+		taskbar_box.visible = false
 	if index == 2:
 		character_select.visible = true
 		costume_select.visible = false
 		alarm_box.visible = false
 		numpad.visible = false
+		taskbar_box.visible = false
 	if index == 3:
+		if is_taskbar:
+			numpad.set_position(Vector2(numpad.position.x, numpad.position.y - 80))
+		is_taskbar = false
 		character_select.visible = false
 		costume_select.visible = false
 		alarm_box.visible = true
 		numpad.visible = true
+		taskbar_box.visible = false
 	if index == 4:
 		border.visible = not border.visible
 	if index == 5:
 		current_pet.scale = Vector2(0 - current_pet.scale.x, current_pet.scale.y)
+	if index == 6:
+		if not is_taskbar:
+			numpad.set_position(Vector2(numpad.position.x, numpad.position.y + 80))
+		is_taskbar = true
+		character_select.visible = false
+		costume_select.visible = false
+		alarm_box.visible = false
+		numpad.visible = true
+		taskbar_box.visible = true
+		
 
 func _on_character_select_item_activated(index: int) -> void:
 	character_select.visible = false
@@ -256,6 +280,7 @@ func _on_character_select_item_activated(index: int) -> void:
 			current_pet_scene = load("res://pet_scenes/" + mod + "/character.tscn")
 			found_pet = true
 			pet_name = character.get_value("character", "name")
+			last_pet = pet_name
 			pet_idle_anims = character.get_value("character", "idle_anims")
 			pet_sitidle_anims = character.get_value("character", "sitidle_anims")
 			pet_clothes_toggles = character.get_value("character", "clothes_toggles")
@@ -273,6 +298,7 @@ func _on_character_select_item_activated(index: int) -> void:
 	if not found_pet:
 		current_pet_scene = load("res://pet_scenes/miles/character.tscn")
 		pet_name = "Miles Edgeworth"
+		last_pet = "Miles Edgeworth"
 		pet_idle_anims = 2
 		pet_sitidle_anims = 1
 		pet_clothes_toggles = 1
@@ -344,50 +370,85 @@ func _on_alarm_off() -> void:
 
 
 func _on_button_1_pressed() -> void:
-	alarm_box.text += str(1)
+	if is_taskbar:
+		taskbar_box.text += str(1)
+	else:
+		alarm_box.text += str(1)
 
 
 func _on_button_2_pressed() -> void:
-	alarm_box.text += str(2)
-
+	if is_taskbar:
+		taskbar_box.text += str(2)
+	else:
+		alarm_box.text += str(2)
 
 func _on_button_3_pressed() -> void:
-	alarm_box.text += str(3)
+	if is_taskbar:
+		taskbar_box.text += str(3)
+	else:
+		alarm_box.text += str(3)
 
 
 func _on_button_4_pressed() -> void:
-	alarm_box.text += str(4)
+	if is_taskbar:
+		taskbar_box.text += str(4)
+	else:
+		alarm_box.text += str(4)
 
 
 func _on_button_5_pressed() -> void:
-	alarm_box.text += str(5)
+	if is_taskbar:
+		taskbar_box.text += str(5)
+	else:
+		alarm_box.text += str(5)
 
 
 func _on_button_6_pressed() -> void:
-	alarm_box.text += str(6)
+	if is_taskbar:
+		taskbar_box.text += str(6)
+	else:
+		alarm_box.text += str(6)
 
 
 func _on_button_7_pressed() -> void:
-	alarm_box.text += str(7)
+	if is_taskbar:
+		taskbar_box.text += str(7)
+	else:
+		alarm_box.text += str(7)
 
 
 func _on_button_8_pressed() -> void:
-	alarm_box.text += str(8)
+	if is_taskbar:
+		taskbar_box.text += str(8)
+	else:
+		alarm_box.text += str(8)
 
 
 func _on_button_9_pressed() -> void:
-	alarm_box.text += str(9)
+	if is_taskbar:
+		taskbar_box.text += str(9)
+	else:
+		alarm_box.text += str(9)
 
 
 func _on_button_0_pressed() -> void:
-	alarm_box.text += str(0)
+	if is_taskbar:
+		taskbar_box.text += str(0)
+	else:
+		alarm_box.text += str(0)
 
 
 func _on_button_done_pressed() -> void:
-	alarm_box.text = str(float(alarm_box.text))
-	alarm.start(float(alarm_box.text))
-	alarm_box.text = ""
+	if is_taskbar:
+		taskbar_box.text = str(float(taskbar_box.text))
+		taskbar_height = float(taskbar_box.text)
+		taskbar_box.text = ""
+	else:
+		alarm_box.text = str(float(alarm_box.text))
+		alarm.start(float(alarm_box.text))
+		alarm_box.text = ""
 	alarm_box.visible = false
+	taskbar_box.visible = false
 	numpad.visible = false
 	menu.visible = false
 	ui_open = false

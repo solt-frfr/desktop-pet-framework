@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mvsta"]
 size = Vector2(385, 385)
 
-[node name="Window" type="Window" node_paths=PackedStringArray("timer", "alarm", "alarm_stop", "alarm_box", "alarm_button", "menu", "character_select", "costume_select", "hitbox", "numpad", "border")]
+[node name="Window" type="Window" node_paths=PackedStringArray("timer", "alarm", "alarm_stop", "alarm_box", "taskbar_box", "alarm_button", "menu", "character_select", "costume_select", "hitbox", "numpad", "border")]
 disable_3d = true
 transparent_bg = true
 physics_object_picking = true
@@ -22,6 +22,7 @@ timer = NodePath("Timer")
 alarm = NodePath("Alarm")
 alarm_stop = NodePath("AlarmStop")
 alarm_box = NodePath("AlarmBox")
+taskbar_box = NodePath("TaskbarBox")
 alarm_button = NodePath("AlarmButton")
 menu = NodePath("Menu")
 character_select = NodePath("CharacterSelect")
@@ -36,13 +37,14 @@ offset_bottom = 89.0
 mouse_default_cursor_shape = 2
 auto_width = true
 auto_height = true
-item_count = 6
+item_count = 7
 item_0/text = "Close"
 item_1/text = "Change Costume"
 item_2/text = "Change Character"
 item_3/text = "Alarm"
 item_4/text = "Show/Hide Window Border"
 item_5/text = "Flip"
+item_6/text = "Set Taskbar Height"
 
 [node name="CharacterSelect" type="ItemList" parent="."]
 offset_left = 15.0
@@ -152,6 +154,13 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 texture = ExtResource("2_hjewq")
+
+[node name="TaskbarBox" type="TextEdit" parent="."]
+offset_left = 15.0
+offset_top = 196.0
+offset_right = 259.0
+offset_bottom = 232.0
+placeholder_text = "Enter taskbar height in pixels."
 
 [connection signal="item_activated" from="Menu" to="." method="_on_menu_item_activated"]
 [connection signal="item_activated" from="CharacterSelect" to="." method="_on_character_select_item_activated"]

@@ -172,6 +172,8 @@ Character:
  Once you're all done and can assure that it works, go to Project -> Export...
 
  Create a profile for your OS if you don't have one, then go to the Resources tab.
+ 
+ Under Export Mode, select "Export selected scenes (and dependencies)
 
  Under "Resources to export", find your `character.tscn` and click on it. It should automatically select the necessary folders.
 
