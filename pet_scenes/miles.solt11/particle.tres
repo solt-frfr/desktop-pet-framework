@@ -1,0 +1,29 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=5 format=3 uid="uid://fj70fc24w0xm"]
+
+[sub_resource type="Curve" id="Curve_x5jns"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.498423, 0), -3.3497, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_w32yi"]
+curve = SubResource("Curve_x5jns")
+
+[sub_resource type="Curve" id="Curve_uvuc8"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, -4.90942, 0, 0, Vector2(1, 100), 327.222, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_x5jns"]
+curve = SubResource("Curve_uvuc8")
+
+[resource]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, 5, 0)
+damping_max = 100.0
+damping_curve = SubResource("CurveTexture_x5jns")
+alpha_curve = SubResource("CurveTexture_w32yi")

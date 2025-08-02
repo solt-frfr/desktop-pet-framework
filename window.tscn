@@ -1,41 +1,173 @@
-[gd_scene load_steps=3 format=3 uid="uid://l7swc56dsr14"]
+[gd_scene load_steps=4 format=3 uid="uid://l7swc56dsr14"]
 
 [ext_resource type="Script" uid="uid://3slt7365lsa7" path="res://window.gd" id="1_mvsta"]
-[ext_resource type="PackedScene" uid="uid://dorq8i30gp5v2" path="res://pet.tscn" id="2_hjewq"]
+[ext_resource type="Texture2D" uid="uid://c42c58suyuhkg" path="res://border.png" id="2_hjewq"]
 
-[node name="Window" type="Window"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mvsta"]
+size = Vector2(385, 385)
+
+[node name="Window" type="Window" node_paths=PackedStringArray("timer", "alarm", "alarm_stop", "alarm_box", "alarm_button", "menu", "character_select", "costume_select", "hitbox", "numpad", "border")]
 disable_3d = true
 transparent_bg = true
 physics_object_picking = true
-size = Vector2i(256, 256)
-mouse_passthrough_polygon = PackedVector2Array(0, 0, 256, 256)
+initial_position = 4
+size = Vector2i(384, 384)
 borderless = true
 always_on_top = true
 transparent = true
+mouse_passthrough = true
+keep_title_visible = true
 script = ExtResource("1_mvsta")
-
-[node name="Pet" parent="." instance=ExtResource("2_hjewq")]
-scale = Vector2(2, 2)
+timer = NodePath("Timer")
+alarm = NodePath("Alarm")
+alarm_stop = NodePath("AlarmStop")
+alarm_box = NodePath("AlarmBox")
+alarm_button = NodePath("AlarmButton")
+menu = NodePath("Menu")
+character_select = NodePath("CharacterSelect")
+costume_select = NodePath("CostumeSelect")
+hitbox = NodePath("Hitbox")
+numpad = NodePath("Numpad")
+border = NodePath("Border")
 
 [node name="Menu" type="ItemList" parent="."]
 offset_right = 164.0
 offset_bottom = 89.0
+mouse_default_cursor_shape = 2
 auto_width = true
 auto_height = true
-item_count = 3
+item_count = 6
 item_0/text = "Close"
 item_1/text = "Change Costume"
 item_2/text = "Change Character"
+item_3/text = "Alarm"
+item_4/text = "Show/Hide Window Border"
+item_5/text = "Flip"
 
 [node name="CharacterSelect" type="ItemList" parent="."]
 offset_left = 15.0
 offset_top = 86.0
 offset_right = 195.0
 offset_bottom = 256.0
+mouse_default_cursor_shape = 2
 auto_width = true
-item_count = 3
-item_0/text = "Miles Edgeworth"
-item_1/text = "Hatsune Miku"
-item_2/text = "Kasane Teto"
+auto_height = true
+
+[node name="CostumeSelect" type="ItemList" parent="."]
+offset_left = 15.0
+offset_top = 59.0
+offset_right = 195.0
+offset_bottom = 99.0
+mouse_default_cursor_shape = 2
+auto_width = true
+auto_height = true
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AlarmBox" type="TextEdit" parent="."]
+offset_left = 15.0
+offset_top = 116.0
+offset_right = 212.0
+offset_bottom = 151.0
+placeholder_text = "Enter time in seconds."
+
+[node name="AlarmButton" type="Button" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -47.0
+offset_right = 47.0
+offset_bottom = 31.0
+grow_horizontal = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Stop Alarm"
+
+[node name="Alarm" type="Timer" parent="."]
+one_shot = true
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(192.5, 192.5)
+shape = SubResource("RectangleShape2D_mvsta")
+
+[node name="Numpad" type="GridContainer" parent="."]
+offset_left = 18.0
+offset_top = 153.0
+offset_right = 234.0
+offset_bottom = 184.0
+mouse_default_cursor_shape = 2
+columns = 11
+
+[node name="Button1" type="Button" parent="Numpad"]
+layout_mode = 2
+text = "1"
+
+[node name="Button2" type="Button" parent="Numpad"]
+layout_mode = 2
+text = "2"
+
+[node name="Button3" type="Button" parent="Numpad"]
+layout_mode = 2
+text = "3"
+
+[node name="Button4" type="Button" parent="Numpad"]
+layout_mode = 2
+text = "4"
+
+[node name="Button5" type="Button" parent="Numpad"]
+layout_mode = 2
+text = "5"
+
+[node name="Button6" type="Button" parent="Numpad"]
+layout_mode = 2
+text = "6"
+
+[node name="Button7" type="Button" parent="Numpad"]
+layout_mode = 2
+text = "7"
+
+[node name="Button8" type="Button" parent="Numpad"]
+layout_mode = 2
+text = "8"
+
+[node name="Button9" type="Button" parent="Numpad"]
+layout_mode = 2
+text = "9"
+
+[node name="Button0" type="Button" parent="Numpad"]
+layout_mode = 2
+text = "0"
+
+[node name="ButtonDone" type="Button" parent="Numpad"]
+layout_mode = 2
+text = "↵"
+
+[node name="AlarmStop" type="Timer" parent="."]
+one_shot = true
+
+[node name="Border" type="TextureRect" parent="."]
+z_index = -10
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("2_hjewq")
 
 [connection signal="item_activated" from="Menu" to="." method="_on_menu_item_activated"]
+[connection signal="item_activated" from="CharacterSelect" to="." method="_on_character_select_item_activated"]
+[connection signal="item_activated" from="CostumeSelect" to="." method="_on_costume_select_item_activated"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="AlarmButton" to="." method="_on_alarm_button_pressed"]
+[connection signal="timeout" from="Alarm" to="." method="_on_alarm_off"]
+[connection signal="pressed" from="Numpad/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="Numpad/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Numpad/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Numpad/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="Numpad/Button5" to="." method="_on_button_5_pressed"]
+[connection signal="pressed" from="Numpad/Button6" to="." method="_on_button_6_pressed"]
+[connection signal="pressed" from="Numpad/Button7" to="." method="_on_button_7_pressed"]
+[connection signal="pressed" from="Numpad/Button8" to="." method="_on_button_8_pressed"]
+[connection signal="pressed" from="Numpad/Button9" to="." method="_on_button_9_pressed"]
+[connection signal="pressed" from="Numpad/Button0" to="." method="_on_button_0_pressed"]
+[connection signal="pressed" from="Numpad/ButtonDone" to="." method="_on_button_done_pressed"]
+[connection signal="timeout" from="AlarmStop" to="." method="_on_alarm_stop_timeout"]
