@@ -26,7 +26,7 @@
  
  Flip Sprites ✅
  
- Particle Effects ✅
+ Particle Effects ✅ - Not available in compatibility builds.
  
  Open Source ✅
 
