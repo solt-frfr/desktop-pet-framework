@@ -100,8 +100,8 @@ func _ready():
 		pet_sitidle_anims = 1
 		pet_clothes_toggles = 0
 		pet_toggle_style = 0
-		pet_sit_offset = Vector2(0, 256)
-		pet_drag_offset = Vector2(0, 30)
+		pet_sit_offset = 216
+		pet_drag_offset = Vector2i(0, 30)
 		pet_scale = 3
 	current_pet = current_pet_scene.instantiate()
 	add_child(current_pet)
@@ -275,7 +275,7 @@ func _on_character_select_item_activated(index: int) -> void:
 		image.set_size_override(Vector2(16, 16))
 		
 		character_select.add_item(name, image)
-		if name == character_select.item_selected.get_name():
+		if name == character_select.get_item_text(character_select.get_selected_items()[0]):
 			current_pet_scene = load("res://pet_scenes/" + mod + "/character.tscn")
 			found_pet = true
 			pet_name = character.get_value("character", "name")
@@ -287,11 +287,14 @@ func _on_character_select_item_activated(index: int) -> void:
 			pet_sit_offset = character.get_value("character", "sit_offset")
 			pet_drag_offset = character.get_value("character", "drag_offset")
 			pet_scale = character.get_value("character", "scale")
-			var i = 0
-			while i < pet_clothes_toggles:
-				pet_clothes_names.append(character.get_value("character", "clothes_name" + str(i + 1)))
-				costume_select.add_item(character.get_value("character", "clothes_name" + str(i + 1)))
-				i += 1
+			if pet_toggle_style != 0:
+				var i = 0
+				while i < pet_clothes_toggles:
+					pet_clothes_names.append(character.get_value("character", "clothes_name" + str(i + 1)))
+					costume_select.add_item(character.get_value("character", "clothes_name" + str(i + 1)))
+					i += 1
+			else:
+				costume_select.add_item("No costumes.", null, false)
 			break
 			
 	if not found_pet:
@@ -302,8 +305,8 @@ func _on_character_select_item_activated(index: int) -> void:
 		pet_sitidle_anims = 1
 		pet_clothes_toggles = 0
 		pet_toggle_style = 0
-		pet_sit_offset = Vector2(0, 256)
-		pet_drag_offset = Vector2(0, 30)
+		pet_sit_offset = 216
+		pet_drag_offset = Vector2i(0, 30)
 		pet_scale = 3
 	current_pet = current_pet_scene.instantiate()
 	add_child(current_pet)
