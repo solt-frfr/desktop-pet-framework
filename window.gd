@@ -71,7 +71,7 @@ func _ready():
 		
 		var name = character.get_value("character", "name")
 		
-		var tex = load("res://pet_scenes/miles.solt11/icon.png") as Texture2D
+		var tex = load("res://pet_scenes/" + mod + "/icon.png") as Texture2D
 		var img = tex.get_image()  # This returns an Image
 		img.resize(16, 16, Image.INTERPOLATE_LANCZOS)
 		var image = ImageTexture.create_from_image(img)
@@ -100,7 +100,6 @@ func _ready():
 					i += 1
 			else:
 				costume_select.add_item("No costumes.", null, false)
-			break
 			
 	if not found_pet:
 		current_pet_scene = load("res://pet_scenes/miles.solt11/character.tscn")
@@ -280,13 +279,13 @@ func _on_character_select_item_activated(index: int) -> void:
 		
 		var name = character.get_value("character", "name")
 		
-		var tex = load("res://pet_scenes/miles.solt11/icon.png") as Texture2D
+		var tex = load("res://pet_scenes/" + mod + "/icon.png") as Texture2D
 		var img = tex.get_image()  # This returns an Image
 		img.resize(16, 16, Image.INTERPOLATE_LANCZOS)
 		var image = ImageTexture.create_from_image(img)
 		
-		character_select.add_item(name, image)
 		if name == character_select.get_item_text(character_select.get_selected_items()[0]):
+			costume_select.clear()
 			current_pet_scene = load("res://pet_scenes/" + mod + "/character.tscn")
 			found_pet = true
 			pet_name = character.get_value("character", "name")
@@ -306,7 +305,6 @@ func _on_character_select_item_activated(index: int) -> void:
 					i += 1
 			else:
 				costume_select.add_item("No costumes.", null, false)
-			break
 			
 	if not found_pet:
 		current_pet_scene = load("res://pet_scenes/miles.solt11/character.tscn")

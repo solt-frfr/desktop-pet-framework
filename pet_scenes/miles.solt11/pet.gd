@@ -17,7 +17,6 @@ var alarm_length
 
 func _ready():
 	sprite.play("startup")
-	timer.start(5)
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
 	var save = ConfigFile.new()
 	save.load(scene_file_path.replace(".tscn", ".ini"))
@@ -91,6 +90,8 @@ func _on_timer_timeout() -> void:
 
 
 func _on_sprite_animation_finished() -> void:
+	if sprite.animation == "startup":
+		timer.start(5)
 	if sprite.animation == "tosleep":
 		sprite.play("sleep")
 	elif sprite.animation.contains("sitidle"):
