@@ -1,4 +1,4 @@
-[gd_scene load_steps=176 format=3 uid="uid://dorq8i30gp5v2"]
+[gd_scene load_steps=177 format=3 uid="uid://dorq8i30gp5v2"]
 
 [ext_resource type="Script" uid="uid://ctri66kfcsifn" path="res://pet_scenes/miles.solt11/pet.gd" id="1_wbmm6"]
 [ext_resource type="Script" uid="uid://cvsotjoniu6si" path="res://pet_scenes/miles.solt11/chest.gd" id="2_r4asy"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://cbf8iubov7uhb" path="res://pet_scenes/miles.solt11/alarm.mp3" id="9_yliyg"]
 [ext_resource type="Texture2D" uid="uid://b6xwenl54sepj" path="res://pet_scenes/miles.solt11/sprites/head.png" id="10_5cayn"]
 [ext_resource type="Texture2D" uid="uid://b15vhub7q6ngf" path="res://pet_scenes/miles.solt11/sprites/crotch.png" id="10_tx2mf"]
+[ext_resource type="Texture2D" uid="uid://dpvaurfced8e6" path="res://pet_scenes/miles.solt11/icon.png" id="12_c1s1g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbrfd"]
 size = Vector2(25, 14)
@@ -1806,6 +1807,7 @@ texture = ExtResource("10_tx2mf")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+texture = ExtResource("12_c1s1g")
 
 [connection signal="input_event" from="Chest" to="." method="_on_chest_input_event"]
 [connection signal="input_event" from="Crotch" to="." method="_on_crotch_input_event"]
