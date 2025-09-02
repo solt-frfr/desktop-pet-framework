@@ -14,6 +14,8 @@ extends Node2D
 var ui_open = false
 var pet_scale
 var alarm_length
+var idle_anims
+var sit_anims
 
 func _ready():
 	sprite.play("startup")
@@ -22,6 +24,8 @@ func _ready():
 	save.load(scene_file_path.replace(".tscn", ".ini"))
 	pet_scale = save.get_value("character", "scale")
 	alarm_length = save.get_value("character", "alarm_length")
+	idle_anims = save.get_value("character", "idle_anims")
+	sit_anims = save.get_value("character", "sitidle_anims")
 
 func _process(delta):
 	if not ui_open:
@@ -33,9 +37,10 @@ func _process(delta):
 		if randaction < 90:
 			# Play and idle animation
 			var randtime = randi_range(5, 15)
-			var randanim = randi_range(1, 2)
-			var anim = "idle" + str(randanim)
-			sprite.play(anim)
+			if idle_anims > 0:
+				var randanim = randi_range(1, idle_anims)
+				var anim = "idle" + str(randanim)
+				sprite.play(anim)
 			timer.start(randtime)
 		else:
 			# Sleep
@@ -44,9 +49,10 @@ func _process(delta):
 	elif is_actionable && not is_sleeping && is_sitting:
 		is_actionable = false
 		var randtime = randi_range(5, 15)
-		var randanim = randi_range(1, 1)
-		var anim = "sitidle" + str(randanim)
-		sprite.play(anim)
+		if sit_anims > 0:
+			var randanim = randi_range(1, sit_anims)
+			var anim = "sitidle" + str(randanim)
+			sprite.play(anim)
 		timer.start(randtime)
 		
 		

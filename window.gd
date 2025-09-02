@@ -219,6 +219,8 @@ func _on_menu_item_activated(index: int) -> void:
 		var save = ConfigFile.new()
 		save.set_value("save_data", "last_pet", last_pet)
 		save.set_value("save_data", "taskbar_height", taskbar_height)
+		save.set_value("save_data", "last_pos", DisplayServer.window_get_position())
+		save.set_value("save_data", "sitting", current_pet.is_sitting)
 		save.save("user://save.ini")
 		get_tree().quit()
 	if index == 1:
